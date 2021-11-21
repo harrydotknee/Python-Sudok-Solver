@@ -30,8 +30,12 @@ class Grid:
 
     def columns(self):
         grid_of_columns = []
-        for i in self.values:
-            grid_of_columns.append(Column(i))
+        for i in range(0, len(self.values)):
+            column = []
+            for j in range(len(self.values[i])):
+                column.append(self.values[j])
+            grid_of_columns.append(Column(column))
+                
         return grid_of_columns
 
     def is_block_valid(self):
