@@ -22,5 +22,8 @@ incomplete_example = [ [3, 0, 6, 5, 0, 8, 0, 0, 0],
 complete_grid = Grid(complete_example)
 incomplete_grid = Grid(incomplete_example)
 
-print("complete (true): " + str(complete_grid.is_valid()))
-print("incomplete (true): "  + str(incomplete_grid.is_valid()))
+print("Tests should all return True:")
+print("-                Complete grid is valid: " + str(complete_grid.is_valid()))
+print("-             Complete grid is complete: " + str(complete_grid.is_complete()))
+print("-        Incomplete valid grid is valid: "  + str(incomplete_grid.is_valid()))
+print("- Incomplete valid grid is not complete: "  + str(not incomplete_grid.is_complete()))

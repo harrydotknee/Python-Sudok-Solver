@@ -35,7 +35,6 @@ class Grid:
             for y in range(0,9): # for each in column
                 column.append(self.values[y][x])
             grid_of_columns.append(Column(column))
-            print(column)
         return grid_of_columns
 
     def is_block_valid(self):
@@ -60,3 +59,13 @@ class Grid:
         if self.is_row_valid() and self.is_column_valid() and self.is_block_valid():
             return True
         return False
+
+    def is_complete(self):
+        if self.is_valid():
+            for row in self.rows():
+                if 0 in row.values:
+                    return False
+            return True
+        return False
+
+
