@@ -7,5 +7,6 @@ class Column:
         for i in self.values:
             if i in checked:
                 return False
-            checked.append(i)
+            if i != 0:
+                checked.append(i)
         return True

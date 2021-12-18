@@ -17,11 +17,11 @@ class Grid:
         ]
 
     def blocks(self):
-        return [
-            self.block_row(self.values[:3]),
-            self.block_row(self.values[3:6]),
+        return (
+            self.block_row(self.values[:3]) +
+            self.block_row(self.values[3:6]) +
             self.block_row(self.values[6:9])
-        ]
+        )
     def rows(self):
         grid_of_rows = []
         for i in self.values:
@@ -30,19 +30,17 @@ class Grid:
 
     def columns(self):
         grid_of_columns = []
-        for i in range(0, len(self.values)):
+        for x in range(0, 9): # for each in row
             column = []
-            for j in range(len(self.values[i])):
-                column.append(self.values[j])
+            for y in range(0,9): # for each in column
+                column.append(self.values[y][x])
             grid_of_columns.append(Column(column))
-                
         return grid_of_columns
 
     def is_block_valid(self):
-        for block_row in self.blocks():
-            for block in block_row:
-                if block.is_valid() == False:
-                    return False
+        for block in self.blocks():
+            if block.is_valid() == False:
+                return False
         return True
 
     def is_row_valid(self):
@@ -62,5 +60,12 @@ class Grid:
             return True
         return False
 
+    def is_complete(self):
+        if self.is_valid():
+            for row in self.rows():
+                if 0 in row.values:
+                    return False
+            return True
+        return False
 
 
