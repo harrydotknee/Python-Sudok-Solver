@@ -36,8 +36,8 @@ def valid_square(grid, row, column, value):
         if grid[j][column] == value:
             return False
 
-    start_row = row - row % 3 # 3 = 3
-    start_column = column - column % 3 # 8 = 6
+    start_row = row - row % 3
+    start_column = column - column % 3
 
     for i in range(3):
         for j in range(3):
@@ -64,9 +64,9 @@ def solve(grid, row, column):
             grid[row][column] = i
             if solve(grid, row, column + 1):
                 return True
+                
     grid[row][column] = 0
     return False
-
 
 if solve(GRID, 0, 0):
     print(GRID)
