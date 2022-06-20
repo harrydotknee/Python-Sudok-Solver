@@ -36,12 +36,19 @@ def valid_square(grid, row, column, value):
         if grid[j][column] == value:
             return False
 
-    return True
+    start_row = row - row % 3 # 3 = 3
+    start_column = column - column % 3 # 8 = 6
 
+    for i in range(3):
+        for j in range(3):
+            if grid[start_row + i][start_column + j] == value:
+                return False
+
+    return True
 
 def solve(grid, row, column):
     if row == GRID_SIZE - 1 and column == GRID_SIZE:
-        print("done")
+        print_grid(grid)
         return True
 
     if column == GRID_SIZE:
@@ -50,29 +57,16 @@ def solve(grid, row, column):
 
     if GRID_REFERENCE[row][column] != 0:
         solve(grid, row, column + 1)
-
-    square_valid = False
+        return False
 
     for i in range(1, GRID_SIZE + 1):
         if valid_square(grid, row, column, i):
             grid[row][column] = i
-            square_valid = True
-            solve(grid, row, column + 1)
-    if not square_valid:
-        grid[row][column] = 0
-        if column > 0:
-            while(GRID_REFERENCE[row][column - 1] != 0):
-                if column == 0:
-                    row -= 1
-                    column = GRID_SIZE - 1
-                else:
-                    column -= 1
-        
-        solve(grid, row, column - 1)
+            if solve(grid, row, column + 1):
+                return True
+    grid[row][column] = 0
     return False
 
 
 if solve(GRID, 0, 0):
-    print_grid(GRID)
-
-print("donezo")
+    print(GRID)
